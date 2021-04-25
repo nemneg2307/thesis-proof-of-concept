@@ -17,11 +17,6 @@ pipeline {
                 sh 'mvn test'
             }
 
-            post {
-                always {
-                    junit '**/target/TEST-*.xml'
-                }
-            }
         }
 
         stage("deploy"){
