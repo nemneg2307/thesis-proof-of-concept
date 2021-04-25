@@ -31,15 +31,4 @@ pipeline {
             }
         }
     }
-    post{
-        always{
-            //will be executed always
-        }
-        success{
-            //only if succeeded
-        }
-        failure {
-            //only if failed
-        }
-    }
 }
