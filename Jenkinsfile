@@ -12,11 +12,6 @@ pipeline {
         }
 
         stage("test"){
-            when {
-                expression{
-                    BRANCH_NAME == 'develop'
-                }
-            }
             steps {
                 echo 'testing the app...'
                 //sh 'mvn -B -DskipTests clean package'
