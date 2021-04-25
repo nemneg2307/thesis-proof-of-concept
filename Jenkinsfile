@@ -7,7 +7,7 @@ pipeline {
         stage("build"){
             steps {
                 echo 'building the app...'
-                sh 'mvn -B -DskipTests clean package'
+                sh './mvnw -B -DskipTests clean package'
             }
         }
 
