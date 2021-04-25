@@ -7,14 +7,20 @@ pipeline {
         stage("build"){
             steps {
                 echo 'building the app...'
-                sh 'mvn -B -DskipTests clean package'
+                sh 'mvn clean compile'
             }
         }
 
         stage("test"){
             steps {
                 echo 'testing the app...'
-                //sh 'mvn -B -DskipTests clean package'
+                sh 'mvn test'
+            }
+
+            post {
+                always {
+                    junit '**/target/TEST-*.xml'
+                }
             }
         }
 
