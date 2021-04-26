@@ -15,7 +15,7 @@ pipeline {
             buildStatus =  buildStatus ?: 'SUCCESSFUL'
           def colorName = 'RED'
           def colorCode = '#FF0000'
-          def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+          def subject = "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
           def summary = "${subject} (${env.BUILD_URL})"
             steps {
                 echo 'testing the app...'
@@ -23,11 +23,6 @@ pipeline {
             }
             post {
                 always{
-                        def colorName = 'RED'
-                        def colorCode = '#FF0000'
-                        def subject = "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-                        def summary = "${subject} (${env.BUILD_URL})"
-
                         slackSend (color: colorCode, message: summary)
                     }
             }
