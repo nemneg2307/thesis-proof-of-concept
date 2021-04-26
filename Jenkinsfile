@@ -3,6 +3,9 @@ pipeline {
     tools {
         maven 'Maven'
     }
+    environment {
+            ASDF = '<a href="http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/">Link</a>'
+        }
     stages {
         stage("build"){
             steps {
@@ -22,8 +25,7 @@ pipeline {
                         slackSend (color: '#FF0000', message: "Job '${env.JOB_NAME}, Build nr. [${env.BUILD_NUMBER}]', Result: FAILED -> (http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/)")
                     }
                 success{
-                String asd = '<a href="http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/">Link</a>)'
-                    slackSend (color: '#008000', message: "Job '${env.JOB_NAME}, Build nr. [${env.BUILD_NUMBER}]', \n Result: SUCCEEDED -> " + asd)
+                    slackSend (color: '#008000', message: "Job '${env.JOB_NAME}, Build nr. [${env.BUILD_NUMBER}]', \n Result: SUCCEEDED -> ${env.ASDF}")
                 }
                 unstable{
                     slackSend (color: '#FFFF00', message: "Job '${env.JOB_NAME}, Build nr. [${env.BUILD_NUMBER}]', Result: UNSTABLE -> (http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/)")
