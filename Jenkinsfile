@@ -12,14 +12,19 @@ pipeline {
         }
 
         stage("test"){
+            buildStatus =  buildStatus ?: 'SUCCESSFUL'
+          def colorName = 'RED'
+          def colorCode = '#FF0000'
+          def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+          def summary = "${subject} (${env.BUILD_URL})"
             steps {
                 echo 'testing the app...'
                 sh 'mvn test'
             }
             post {
                 always{
-                    mail bcc: '', body: "<b>Example</b><br>Project: ${env.JOB_NAME} <br>Build Number: ${env.BUILD_NUMBER} <br> URL de build: ${env.BUILD_URL}", cc: '', charset: 'UTF-8', from: '', mimeType: 'text/html', replyTo: '', subject: "ERROR CI: Project name -> ${env.JOB_NAME}", to: "jenkins01.noreply@gmail.com";
-                }
+                  notifyBuild('STARTED')
+                    }
             }
         }
 
@@ -29,5 +34,19 @@ pipeline {
                 //sh 'mvn -B -DskipTests clean package'
             }
         }
+    }
+    def notifyBuild(String buildStatus = 'STARTED') {
+      // build status of null means successful
+      buildStatus =  buildStatus ?: 'SUCCESSFUL'
+
+      // Default values
+      def colorName = 'RED'
+      def colorCode = '#FF0000'
+      def subject = "${buildStatus}: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
+      def summary = "${subject} (${env.BUILD_URL})"
+
+
+      // Send notifications
+      slackSend (color: colorCode, message: summary)
     }
 }
