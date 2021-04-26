@@ -18,13 +18,16 @@ pipeline {
             }
             post {
                 failure{
-                        slackSend (color: '#FF0000', message: "Job '${env.JOB_NAME}, Build nr. [${env.BUILD_NUMBER}]', Result: FAILED -> (${env.BUILD_URL})")
+                        slackSend (color: '#FF0000', message: "Job '${env.JOB_NAME}, Build nr. [${env.BUILD_NUMBER}]',
+                        Result: FAILED -> (http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/)")
                     }
                 success{
-                    slackSend (color: '#008000', message: "Job '${env.JOB_NAME}, Build nr. [${env.BUILD_NUMBER}]', Result: SUCCEEDED -> (${env.BUILD_URL})")
+                    slackSend (color: '#008000', message: "Job '${env.JOB_NAME}, Build nr. [${env.BUILD_NUMBER}]',
+                    Result: SUCCEEDED -> (http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/)")
                 }
                 unstable{
-                    slackSend (color: '#FFFF00', message: "Job '${env.JOB_NAME}, Build nr. [${env.BUILD_NUMBER}]', Result: UNSTABLE -> (${env.BUILD_URL})")
+                    slackSend (color: '#FFFF00', message: "Job '${env.JOB_NAME}, Build nr. [${env.BUILD_NUMBER}]',
+                    Result: UNSTABLE -> (http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/)")
                 }
             }
         }
