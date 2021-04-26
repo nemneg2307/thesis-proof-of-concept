@@ -17,9 +17,15 @@ pipeline {
                 sh 'mvn test'
             }
             post {
-                always{
-                        slackSend (color: '#FF0000', message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
+                failure{
+                        slackSend (color: '#FF0000', message: "Job '${env.JOB_NAME}, Build nr. [${env.BUILD_NUMBER}]', Result: FAILED -> (${env.BUILD_URL})")
                     }
+                success{
+                    slackSend (color: '#008000', message: "Job '${env.JOB_NAME}, Build nr. [${env.BUILD_NUMBER}]', Result: SUCCEEDED -> (${env.BUILD_URL})")
+                }
+                unstable{
+                    slackSend (color: '#FFFF00', message: "Job '${env.JOB_NAME}, Build nr. [${env.BUILD_NUMBER}]', Result: UNSTABLE -> (${env.BUILD_URL})")
+                }
             }
         }
 
