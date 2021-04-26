@@ -11,7 +11,7 @@ pipeline {
             }
             post {
                 always {
-                    slackSend (color: '#FFFFFF', message: "(http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/)")
+                    slackSend (color: '#FFFFFF', message: "(http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/job/${env.BUILD_NUMBER}/)")
                 }
             }
         }
