@@ -11,7 +11,7 @@ pipeline {
             }
             post {
                 always {
-                    slackSend (color: '#FFFFFF', message: "(http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/job/${env.BUILD_NUMBER}/)")
+                    slackSend (color: '#FFFFFF', message: "(${env.BUILD_URL})")
                 }
             }
         }
@@ -24,7 +24,6 @@ pipeline {
             post {
 
                 failure{
-
                     slackSend (color: '#FF0000', message: "Build ${env.JOB_NAME}[${env.BUILD_NUMBER}] FAILED")
                 }
                 success{
@@ -61,7 +60,7 @@ pipeline {
         stage("deploy"){
             steps {
                 echo 'deploying the app...'
-                //sh 'mvn -B -DskipTests clean package'
+                sh 'mvn deploy'
             }
         }
     }
