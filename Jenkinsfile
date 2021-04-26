@@ -14,13 +14,13 @@ pipeline {
 
                 failure{
 
-                    slackSend (color: '#FF0000', message: "Build ${env.JOB_NAME}[${env.BUILD_NUMBER}] FAILED \n(http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/)")
+                    slackSend (color: '#FF0000', message: "Build ${env.JOB_NAME}[${env.BUILD_NUMBER}] FAILED")
                 }
                 success{
-                    slackSend (color: '#008000', message: "Build ${env.JOB_NAME}[${env.BUILD_NUMBER}] SUCCEEDED \n(http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/)")
+                    slackSend (color: '#008000', message: "Build ${env.JOB_NAME}[${env.BUILD_NUMBER}] SUCCEEDED")
                 }
                 unstable{
-                    slackSend (color: '#FFFF00', message: "Build ${env.JOB_NAME}[${env.BUILD_NUMBER}] UNSTABLE \n(http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/)")
+                    slackSend (color: '#FFFF00', message: "Build ${env.JOB_NAME}[${env.BUILD_NUMBER}] UNSTABLE")
                 }
             }
         }
@@ -36,13 +36,13 @@ pipeline {
                 }
                 failure{
 
-                    slackSend (color: '#FF0000', message: "Test ${env.JOB_NAME}[${env.BUILD_NUMBER}] FAILED \n(http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/)")
+                    slackSend (color: '#FF0000', message: "Test ${env.JOB_NAME}[${env.BUILD_NUMBER}] FAILED")
                 }
                 success{
-                    slackSend (color: '#008000', message: "Test ${env.JOB_NAME}[${env.BUILD_NUMBER}] SUCCEEDED \n(http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/)")
+                    slackSend (color: '#008000', message: "Test ${env.JOB_NAME}[${env.BUILD_NUMBER}] SUCCEEDED")
                 }
                 unstable{
-                    slackSend (color: '#FFFF00', message: "Test ${env.JOB_NAME}[${env.BUILD_NUMBER}] UNSTABLE \n(http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/)")
+                    slackSend (color: '#FFFF00', message: "Test ${env.JOB_NAME}[${env.BUILD_NUMBER}] UNSTABLE")
                 }
             }
         }
