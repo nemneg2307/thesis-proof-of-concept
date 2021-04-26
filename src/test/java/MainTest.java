@@ -9,6 +9,6 @@ class MainTest {
         Main calc = new Main();
         int result = calc.multiply(2,3);
 
-        assertEquals(7,result);
+        assertEquals(6,result);
     }
 }
