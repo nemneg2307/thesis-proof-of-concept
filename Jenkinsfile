@@ -12,18 +12,13 @@ pipeline {
         }
 
         stage("test"){
-            buildStatus =  buildStatus ?: 'SUCCESSFUL'
-          def colorName = 'RED'
-          def colorCode = '#FF0000'
-          def subject = "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'"
-          def summary = "${subject} (${env.BUILD_URL})"
             steps {
                 echo 'testing the app...'
                 sh 'mvn test'
             }
             post {
                 always{
-                        slackSend (color: colorCode, message: summary)
+                        slackSend (color: '#FF0000', message: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' (${env.BUILD_URL})")
                     }
             }
         }
