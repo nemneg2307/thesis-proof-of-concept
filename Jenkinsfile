@@ -5,6 +5,17 @@ pipeline {
     }
 
     stages {
+        stage("post-link"){
+            steps {
+                echo 'posting the link to slack...'
+            }
+            post {
+                always {
+                    slackSend (color: '#FFFFFF', message: "(http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/)")
+                }
+            }
+        }
+        
         stage("build"){
             steps {
                 echo 'building the app...'
@@ -51,17 +62,6 @@ pipeline {
             steps {
                 echo 'deploying the app...'
                 //sh 'mvn -B -DskipTests clean package'
-            }
-        }
-
-        stage("post-link"){
-            steps {
-                echo 'posting the link to slack...'
-            }
-            post {
-                always {
-                    slackSend (color: '#FFFFFF', message: "(http://dev-jenkins.duckdns.org:8081/job/${env.JOB_NAME}/${env.BUILD_NUMBER}/)")
-                }
             }
         }
     }
